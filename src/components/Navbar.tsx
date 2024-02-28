@@ -29,7 +29,7 @@ export default function Navbar() {
   const [show, setShow] = useState<Boolean>(false);
   return (
     <>
-      <header className="p-2 flex fixed top-0 left-0 right-0 justify-between items-center h-16">
+      <header className="p-2 flex fixed top-0 left-0 right-0 z-[1000] bg-background justify-between items-center h-16">
         <hgroup>
           <h1 className="font-extrabold sm:text-3xl text-2xl">
             Digital <span className="text-primary">Zone</span>
