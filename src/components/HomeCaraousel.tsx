@@ -40,31 +40,33 @@ const categories: Category[] = [
 
 export default function HomeCaraousel() {
   return (
-    <Carousel className="w-full max-w-7xl cursor-pointer">
-      <CarouselContent className="-ml-1">
-        {categories.map((c, index) => (
-          <CarouselItem
-            key={index}
-            className="md:basis-1/2 lg:basis:1/3 xl:basis-1/4"
-          >
-            <Card>
-              <CardContent className="flex flex-col aspect-square items-center justify-center ">
-                <div className="w-full h-56 relative">
-                  <Image
-                    src={c.image}
-                    alt={c.name}
-                    fill={true}
-                    style={{ objectFit: "contain" }}
-                  />
-                </div>
-                <p>{c.name}</p>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
+    <>
+      <Carousel className="w-full max-w-7xl cursor-pointer">
+        <CarouselContent className="-ml-1">
+          {categories.map((c, index) => (
+            <CarouselItem
+              key={index}
+              className="md:basis-1/2 lg:basis:1/3 xl:basis-1/4"
+            >
+              <Card>
+                <CardContent className="flex flex-col aspect-square items-center justify-center ">
+                  <div className="w-full h-56 relative">
+                    <Image
+                      src={c.image}
+                      alt={c.name}
+                      fill={true}
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                  <p>{c.name}</p>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </>
   );
 }
