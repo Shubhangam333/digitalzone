@@ -31,9 +31,12 @@ export default function Navbar() {
     <>
       <header className="p-2 flex fixed top-0 left-0 right-0 z-[1000] bg-background justify-between items-center h-16">
         <hgroup>
-          <h1 className="font-extrabold sm:text-3xl text-2xl">
+          <Link
+            href="/"
+            className="font-extrabold sm:text-3xl text-2xl cursor-pointer"
+          >
             Digital <span className="text-primary">Zone</span>
-          </h1>
+          </Link>
         </hgroup>
         <nav className="sm:block hidden">
           <ul className="flex justify-between items-center w-[15rem] text-lg font-bold">
