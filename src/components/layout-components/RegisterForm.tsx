@@ -3,8 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
+import { toast } from "react-toastify";
 import {
   Form,
   FormControl,
@@ -15,6 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { register } from "@/server-actions/auth";
 const MIN_PASSWORD_LENGTH = 8;
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -42,8 +43,21 @@ export function RegisterForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await register(values);
+
+      if (response.message) {
+        toast.success(response.message);
+        form.reset();
+      }
+
+      if (response.error) {
+        toast.error(response.error);
+      }
+    } catch (error: any) {
+      toast.error(error);
+    }
   }
 
   return (
