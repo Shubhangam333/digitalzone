@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,6 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { login } from "@/server-actions/auth";
+import { toast } from "react-toastify";
 const MIN_PASSWORD_LENGTH = 8;
 const formSchema = z.object({
   email: z.string().email(),
@@ -38,8 +39,22 @@ export function LoginForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await login(values);
+      console.log("r", response);
+      if (response.token) {
+        // cookies().set("token", response.token, { httpOnly: true });
+        toast.success("Login Successful.");
+        form.reset();
+      }
+
+      if (response.error) {
+        toast.error(response.error);
+      }
+    } catch (error: any) {
+      toast.error(error);
+    }
   }
 
   return (
